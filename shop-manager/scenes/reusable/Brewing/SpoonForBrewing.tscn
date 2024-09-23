@@ -1,0 +1,36 @@
+[gd_scene load_steps=3 format=3 uid="uid://cmo8vfnltgw7o"]
+
+[ext_resource type="Texture2D" uid="uid://7k1sqhdhdq5k" path="res://assets/sprites/Brewing/bigSpoon.png" id="1_mf81a"]
+[ext_resource type="Script" path="res://scripts/PickUpBrewing.gd" id="2_plf11"]
+
+[node name="SpoonForBrewing" type="Node2D"]
+
+[node name="Spoon" type="Area2D" parent="."]
+position = Vector2(-13, 0)
+
+[node name="RigidBody2D" type="RigidBody2D" parent="Spoon"]
+position = Vector2(-34, -6)
+rotation = -1.57085
+gravity_scale = 0.08
+can_sleep = false
+
+[node name="BigSpoon" type="Sprite2D" parent="Spoon/RigidBody2D"]
+texture = ExtResource("1_mf81a")
+
+[node name="Area2D" type="Area2D" parent="Spoon/RigidBody2D" node_paths=PackedStringArray("pin_joint")]
+script = ExtResource("2_plf11")
+pin_joint = NodePath("../../../Joint")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Spoon/RigidBody2D/Area2D"]
+polygon = PackedVector2Array(1, -14, 1, 5, 4, 8, 4, 11, 1, 15, -1, 15, -4, 11, -4, 8, -1, 5, -1, -14, 0, -15)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Spoon/RigidBody2D"]
+polygon = PackedVector2Array(1, -14, 1, 5, 4, 8, 4, 11, 1, 15, -1, 15, -4, 11, -4, 8, -1, 5, -1, -14, 0, -15)
+
+[node name="Joint" type="PinJoint2D" parent="."]
+position = Vector2(-47, -6)
+node_b = NodePath("StaticBody2D")
+disable_collision = false
+softness = 0.21
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Joint"]

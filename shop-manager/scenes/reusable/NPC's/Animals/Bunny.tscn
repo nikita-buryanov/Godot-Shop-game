@@ -1,0 +1,142 @@
+[gd_scene load_steps=21 format=3 uid="uid://cwy7ljmc8x28j"]
+
+[ext_resource type="Script" path="res://scenes/reusable/NPC's/Animals/NpcAi.gd" id="1_fchec"]
+[ext_resource type="Texture2D" uid="uid://d232vtc3btptk" path="res://assets/sprites/FX/ShadowAnimation.png" id="2_un2no"]
+[ext_resource type="Texture2D" uid="uid://bjfffnyepgxgf" path="res://assets/sprites/NPC's/Animals/Bunny animation.png" id="3_8spsi"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n030n"]
+atlas = ExtResource("2_un2no")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5lec1"]
+atlas = ExtResource("2_un2no")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ulsm0"]
+atlas = ExtResource("2_un2no")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_47cfc"]
+atlas = ExtResource("2_un2no")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b5mxk"]
+atlas = ExtResource("2_un2no")
+region = Rect2(64, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c6o6o"]
+atlas = ExtResource("2_un2no")
+region = Rect2(80, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kg6fj"]
+atlas = ExtResource("2_un2no")
+region = Rect2(96, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_amb4k"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n030n")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5lec1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ulsm0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_47cfc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b5mxk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c6o6o")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kg6fj")
+}],
+"loop": true,
+"name": &"default",
+"speed": 20.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dan0k"]
+size = Vector2(12, 12)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_oipud"]
+atlas = ExtResource("3_8spsi")
+region = Rect2(0, 0, 16, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8gibq"]
+atlas = ExtResource("3_8spsi")
+region = Rect2(16, 0, 16, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y4mql"]
+atlas = ExtResource("3_8spsi")
+region = Rect2(32, 0, 16, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0wxsq"]
+atlas = ExtResource("3_8spsi")
+region = Rect2(48, 0, 16, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3jdtd"]
+atlas = ExtResource("3_8spsi")
+region = Rect2(64, 0, 16, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gwekt"]
+atlas = ExtResource("3_8spsi")
+region = Rect2(80, 0, 16, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3egvp"]
+atlas = ExtResource("3_8spsi")
+region = Rect2(96, 0, 16, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_4qo6g"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_oipud")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8gibq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_y4mql")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0wxsq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3jdtd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gwekt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3egvp")
+}],
+"loop": true,
+"name": &"default",
+"speed": 20.0
+}]
+
+[node name="Bunny" type="Node2D"]
+script = ExtResource("1_fchec")
+SPEED = null
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="NavigationAgent2D"]
+modulate = Color(1, 1, 1, 0.333333)
+position = Vector2(0, 1)
+sprite_frames = SubResource("SpriteFrames_amb4k")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="NavigationAgent2D"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="NavigationAgent2D/StaticBody2D"]
+shape = SubResource("RectangleShape2D_dan0k")
+
+[node name="Bunny animation" type="AnimatedSprite2D" parent="NavigationAgent2D"]
+position = Vector2(0, -8)
+sprite_frames = SubResource("SpriteFrames_4qo6g")

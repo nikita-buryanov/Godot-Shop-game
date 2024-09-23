@@ -1,0 +1,144 @@
+[gd_scene load_steps=21 format=3 uid="uid://2ykayuflobqi"]
+
+[ext_resource type="Script" path="res://scripts/player_movement.gd" id="1_4inmg"]
+[ext_resource type="Texture2D" uid="uid://b6tsc22wxe4wl" path="res://assets/sprites/Character/Player walking.png" id="1_mxjgg"]
+[ext_resource type="Texture2D" uid="uid://sn8hmd6xq2ec" path="res://assets/sprites/Character/SwordHit.png" id="3_jq6os"]
+[ext_resource type="Script" path="res://scenes/reusable/HitAnimation.gd" id="4_wfhgm"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_5u0bp"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dfkov"]
+atlas = ExtResource("1_mxjgg")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q4b82"]
+atlas = ExtResource("1_mxjgg")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_3to8p"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dfkov")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_q4b82")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 8.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_d8bi5"]
+size = Vector2(12, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d243k"]
+atlas = ExtResource("3_jq6os")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_aua0s"]
+atlas = ExtResource("3_jq6os")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wgoyw"]
+atlas = ExtResource("3_jq6os")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4p4v3"]
+atlas = ExtResource("3_jq6os")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uyk5f"]
+atlas = ExtResource("3_jq6os")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lnc41"]
+atlas = ExtResource("3_jq6os")
+region = Rect2(160, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l7avx"]
+atlas = ExtResource("3_jq6os")
+region = Rect2(192, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x864w"]
+atlas = ExtResource("3_jq6os")
+region = Rect2(224, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xd2r2"]
+atlas = ExtResource("3_jq6os")
+region = Rect2(256, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wtmre"]
+atlas = ExtResource("3_jq6os")
+region = Rect2(288, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_3lgqx"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d243k")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_aua0s")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wgoyw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4p4v3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uyk5f")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lnc41")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_l7avx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_x864w")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xd2r2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wtmre")
+}],
+"loop": false,
+"name": &"Sword Hit",
+"speed": 23.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Player" type="Area2D"]
+script = ExtResource("1_4inmg")
+speed = 100
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.462745)
+position = Vector2(0, 3)
+texture = SubResource("CompressedTexture2D_5u0bp")
+
+[node name="PlayerSprite" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_3to8p")
+animation = &"walk"
+frame_progress = 0.634906
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-1, 0)
+shape = SubResource("RectangleShape2D_d8bi5")
+
+[node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="."]
+rotation = 1.5708
+scale = Vector2(1.5, 1.5)
+sprite_frames = SubResource("SpriteFrames_3lgqx")
+animation = &"Sword Hit"
+frame = 9
+frame_progress = 1.0
+script = ExtResource("4_wfhgm")

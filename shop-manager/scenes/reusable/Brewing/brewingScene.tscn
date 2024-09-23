@@ -1,0 +1,43 @@
+[gd_scene load_steps=6 format=3 uid="uid://1udgefuxrene"]
+
+[ext_resource type="Texture2D" uid="uid://dc7e7qki52u87" path="res://assets/sprites/Brewing/Cauldron see through.png" id="1_ivhlq"]
+[ext_resource type="PackedScene" uid="uid://cmo8vfnltgw7o" path="res://scenes/reusable/Brewing/SpoonForBrewing.tscn" id="2_3mgff"]
+[ext_resource type="PackedScene" uid="uid://csuqdhm41gq5r" path="res://scenes/reusable/Brewing/FlowerForBrewing.tscn" id="3_h6pvl"]
+[ext_resource type="Texture2D" uid="uid://cygw7rmgtl6i1" path="res://assets/sprites/Brewing/Cauldron full.png" id="4_wbjeo"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8733f"]
+size = Vector2(164, 67)
+
+[node name="BrewingScene" type="Node2D"]
+
+[node name="Sprite2D2" type="Sprite2D" parent="."]
+texture = ExtResource("1_ivhlq")
+metadata/_edit_group_ = true
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Sprite2D2"]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Sprite2D2/StaticBody2D"]
+polygon = PackedVector2Array(8, -14, 8, -10, 13, -6, 15, -3, 15, 4, 12, 8, 12, 10, 13, 14, 9, 14, 9, 12, 6, 12, 6, 13, -6, 13, -6, 12, -9, 12, -9, 14, -13, 14, -13, 10, -12, 10, -12, 8, -15, 4, -15, -4, -13, -6, -8, -10, -8, -14, -7, -14, -7, -10, -14, -3, -14, 4, -11, 8, -8, 10, -6, 11, -4, 12, 4, 12, 6, 11, 8, 10, 11, 8, 13, 4, 13, -4, 7, -10, 7, -14)
+
+[node name="SpoonForBrewing" parent="." instance=ExtResource("2_3mgff")]
+
+[node name="FlowerForBrewing" parent="." instance=ExtResource("3_h6pvl")]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.678431)
+texture = ExtResource("4_wbjeo")
+metadata/_edit_group_ = true
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+position = Vector2(-31, -13)
+rotation = -0.887422
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(-27.097, 63.3305)
+rotation = 0.887422
+shape = SubResource("RectangleShape2D_8733f")
+debug_color = Color(0.996667, 0, 0.182178, 0.42)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(0, -25)
+zoom = Vector2(5.65, 5.65)
