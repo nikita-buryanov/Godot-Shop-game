@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="item" load_steps=3 format=3 uid="uid://o746qamb8jy4"]
+
+[ext_resource type="Texture2D" uid="uid://cm3ckiyu3qjj8" path="res://assets/sprites/Items/Foraging items/Purple Mushroom Caps.png" id="1_enmxp"]
+[ext_resource type="Script" path="res://scripts/Inventory/Item.gd" id="1_nxajr"]
+
+[resource]
+script = ExtResource("1_nxajr")
+name = "Purple Mushroom Caps"
+item_type = 0
+weapon_type = null
+id = 2
+max_stack_size = 16
+description = "The caps of a purple mushroom"
+inv_icon = ExtResource("1_enmxp")

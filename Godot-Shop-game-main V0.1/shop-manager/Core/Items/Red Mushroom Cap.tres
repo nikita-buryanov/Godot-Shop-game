@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="item" load_steps=3 format=3 uid="uid://6ymvlxk8bqqv"]
+
+[ext_resource type="Texture2D" uid="uid://vdyajx54p6vs" path="res://assets/sprites/Items/Foraging items/RedMushroomCap.png" id="1_obokp"]
+[ext_resource type="Script" path="res://scripts/Inventory/Item.gd" id="2_l043a"]
+
+[resource]
+script = ExtResource("2_l043a")
+name = "Red Mushroom Cap"
+item_type = 0
+weapon_type = null
+id = 1
+max_stack_size = 16
+description = "The cap of a red mushroom"
+inv_icon = ExtResource("1_obokp")

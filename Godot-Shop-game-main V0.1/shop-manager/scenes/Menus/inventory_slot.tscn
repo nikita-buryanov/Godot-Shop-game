@@ -1,0 +1,45 @@
+[gd_scene load_steps=3 format=3 uid="uid://dn3gekcp3oftu"]
+
+[ext_resource type="Texture2D" uid="uid://calbkdruwq4kw" path="res://assets/sprites/Menues/Inventory/Inventory slot.png" id="1_71hto"]
+[ext_resource type="Script" path="res://scripts/Inventory/slot_info.gd" id="1_epm2n"]
+
+[node name="InventorySlot" type="Control" node_paths=PackedStringArray("slot_sprite", "item_sprite_node", "amount_text")]
+layout_mode = 3
+anchors_preset = 0
+focus_mode = 2
+script = ExtResource("1_epm2n")
+slot_sprite = NodePath("SlotSprite")
+item_sprite_node = NodePath("ItemSprite")
+amount_text = NodePath("ItemSprite/Amount")
+
+[node name="SlotSprite" type="Sprite2D" parent="."]
+position = Vector2(3, 0)
+texture = ExtResource("1_71hto")
+offset = Vector2(12, 12)
+
+[node name="Button" type="Button" parent="."]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 0
+offset_left = 3.0
+offset_right = 11.0
+offset_bottom = 8.0
+scale = Vector2(3, 3)
+
+[node name="ItemSprite" type="Sprite2D" parent="."]
+z_index = 2
+offset = Vector2(15, 12)
+
+[node name="Amount" type="RichTextLabel" parent="ItemSprite"]
+clip_contents = false
+offset_left = 5.0
+offset_top = 9.0
+offset_right = 28.28
+offset_bottom = 24.33
+mouse_filter = 2
+theme_override_font_sizes/normal_font_size = 12
+fit_content = true
+scroll_active = false
+
+[connection signal="mouse_entered" from="Button" to="." method="_on_button_mouse_entered"]
+[connection signal="mouse_exited" from="Button" to="." method="_on_button_mouse_exited"]
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

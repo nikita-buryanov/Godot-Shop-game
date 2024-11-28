@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="item" load_steps=3 format=3 uid="uid://ciadma8tjoogi"]
+
+[ext_resource type="Texture2D" uid="uid://daij71y3q7o1v" path="res://assets/sprites/Items/Mob drops/Bunny leg.png" id="1_005ew"]
+[ext_resource type="Script" path="res://scripts/Inventory/Item.gd" id="1_y8fl6"]
+
+[resource]
+script = ExtResource("1_y8fl6")
+name = "Bunny Leg"
+item_type = 3
+weapon_type = null
+id = 3
+max_stack_size = 16
+description = "They say this should bring you good fortune"
+inv_icon = ExtResource("1_005ew")

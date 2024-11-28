@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="item" load_steps=3 format=3 uid="uid://fxc7bqo5xlce"]
+
+[ext_resource type="Texture2D" uid="uid://c7pteij58rmop" path="res://assets/sprites/Items/Weapons/Swords/Sword.png" id="1_8yc2u"]
+[ext_resource type="Script" path="res://scripts/Inventory/Item.gd" id="1_vnjt4"]
+
+[resource]
+script = ExtResource("1_vnjt4")
+name = "Wooden Sword"
+item_type = 1
+weapon_type = 0
+id = 4
+max_stack_size = 1
+description = "Every body starts somewhere"
+inv_icon = ExtResource("1_8yc2u")

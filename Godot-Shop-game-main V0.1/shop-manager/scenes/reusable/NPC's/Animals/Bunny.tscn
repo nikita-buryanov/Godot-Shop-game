@@ -1,0 +1,173 @@
+[gd_scene load_steps=26 format=3 uid="uid://cwy7ljmc8x28j"]
+
+[ext_resource type="Script" path="res://scripts/Core/Enemies/EnemyData.gd" id="1_7xq82"]
+[ext_resource type="PackedScene" uid="uid://b2q8ly7ux44qh" path="res://scenes/reusable/Core/Dropped item.tscn" id="2_3ligi"]
+[ext_resource type="Texture2D" uid="uid://d232vtc3btptk" path="res://assets/sprites/FX/ShadowAnimation.png" id="2_un2no"]
+[ext_resource type="Texture2D" uid="uid://bjfffnyepgxgf" path="res://assets/sprites/NPC's/Animals/Bunny animation.png" id="3_8spsi"]
+[ext_resource type="Script" path="res://scripts/AI/hit_object.gd" id="3_h7fo4"]
+[ext_resource type="Resource" uid="uid://bol68nbbb2wjm" path="res://Core/Collectable/Bunny.tres" id="3_jty2x"]
+[ext_resource type="Script" path="res://scripts/AI/States/EnemyIdle.gd" id="5_c4i6k"]
+[ext_resource type="Script" path="res://scripts/AI/States/State_Machine.gd" id="5_hknxq"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n030n"]
+atlas = ExtResource("2_un2no")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5lec1"]
+atlas = ExtResource("2_un2no")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ulsm0"]
+atlas = ExtResource("2_un2no")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_47cfc"]
+atlas = ExtResource("2_un2no")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b5mxk"]
+atlas = ExtResource("2_un2no")
+region = Rect2(64, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c6o6o"]
+atlas = ExtResource("2_un2no")
+region = Rect2(80, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kg6fj"]
+atlas = ExtResource("2_un2no")
+region = Rect2(96, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_amb4k"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n030n")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5lec1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ulsm0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_47cfc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b5mxk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c6o6o")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kg6fj")
+}],
+"loop": true,
+"name": &"shadow",
+"speed": 20.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_oipud"]
+atlas = ExtResource("3_8spsi")
+region = Rect2(0, 0, 16, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8gibq"]
+atlas = ExtResource("3_8spsi")
+region = Rect2(16, 0, 16, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y4mql"]
+atlas = ExtResource("3_8spsi")
+region = Rect2(32, 0, 16, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0wxsq"]
+atlas = ExtResource("3_8spsi")
+region = Rect2(48, 0, 16, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3jdtd"]
+atlas = ExtResource("3_8spsi")
+region = Rect2(64, 0, 16, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gwekt"]
+atlas = ExtResource("3_8spsi")
+region = Rect2(80, 0, 16, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3egvp"]
+atlas = ExtResource("3_8spsi")
+region = Rect2(96, 0, 16, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_4qo6g"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_oipud")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8gibq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_y4mql")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0wxsq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3jdtd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gwekt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3egvp")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 20.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dan0k"]
+size = Vector2(12, 3.5)
+
+[node name="Bunny" type="Node2D" node_paths=PackedStringArray("movement_animation", "shadow")]
+z_index = 1
+y_sort_enabled = true
+script = ExtResource("1_7xq82")
+drop_preset = ExtResource("2_3ligi")
+movement_animation = NodePath("Bunny animation")
+shadow = NodePath("AnimatedSprite2D")
+collectible = ExtResource("3_jty2x")
+metadata/_edit_group_ = true
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.333333)
+position = Vector2(0, -5)
+sprite_frames = SubResource("SpriteFrames_amb4k")
+animation = &"shadow"
+
+[node name="Bunny animation" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_4qo6g")
+animation = &"walk"
+frame_progress = 0.260445
+offset = Vector2(0, -14.11)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Bunny animation" node_paths=PackedStringArray("damagable_node") groups=["damagable"]]
+position = Vector2(0, -3)
+script = ExtResource("3_h7fo4")
+damagable_node = NodePath("../..")
+
+[node name="BunnyCollision" type="CollisionShape2D" parent="Bunny animation/StaticBody2D"]
+position = Vector2(0, 3)
+shape = SubResource("RectangleShape2D_dan0k")
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="Bunny animation/StaticBody2D"]
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true
+
+[node name="State Machine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
+script = ExtResource("5_hknxq")
+initial_state = NodePath("Idle")
+
+[node name="Idle" type="Node" parent="State Machine" node_paths=PackedStringArray("main_body", "agent", "timer")]
+script = ExtResource("5_c4i6k")
+main_body = NodePath("../..")
+agent = NodePath("../../Bunny animation/StaticBody2D/NavigationAgent2D")
+timer = NodePath("../../Timer")

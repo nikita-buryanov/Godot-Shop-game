@@ -1,0 +1,289 @@
+[gd_scene load_steps=17 format=3 uid="uid://b3i8vtdshckh5"]
+
+[ext_resource type="Script" path="res://scripts/Levels/level.gd" id="1_t0kcl"]
+[ext_resource type="Script" path="res://scripts/Core/ToolTip.gd" id="2_mg6q3"]
+[ext_resource type="FontFile" uid="uid://nqexl2m0yiwo" path="res://assets/Fonts/Welbut__.ttf" id="2_x3dtj"]
+[ext_resource type="PackedScene" uid="uid://jabc7b771lrm" path="res://scenes/reusable/Tile map.tscn" id="3_oncnj"]
+[ext_resource type="PackedScene" uid="uid://2ykayuflobqi" path="res://scenes/reusable/Core/Player.tscn" id="4_1mnra"]
+[ext_resource type="PackedScene" uid="uid://brpsq4qpae6xh" path="res://scenes/reusable/Core/Camera.tscn" id="5_85ptq"]
+[ext_resource type="Script" path="res://scripts/AI/Border.gd" id="6_5gql2"]
+[ext_resource type="PackedScene" uid="uid://cwy7ljmc8x28j" path="res://scenes/reusable/NPC's/Animals/Bunny.tscn" id="7_sgnt3"]
+[ext_resource type="Texture2D" uid="uid://cna6wds3u57g" path="res://assets/sprites/Menues/Inventory/Inventory.png" id="8_yhas0"]
+[ext_resource type="Script" path="res://scripts/Inventory/InventoryCore.gd" id="9_1my2f"]
+[ext_resource type="Script" path="res://scripts/Inventory/hotbar.gd" id="9_ko3y7"]
+[ext_resource type="Texture2D" uid="uid://2kt1q33qs52q" path="res://assets/sprites/Menues/Inventory/item preview.png" id="9_tol3a"]
+[ext_resource type="PackedScene" uid="uid://dn3gekcp3oftu" path="res://scenes/Menus/inventory_slot.tscn" id="10_bu6l3"]
+[ext_resource type="Resource" uid="uid://fxc7bqo5xlce" path="res://Core/Items/Weapons/Swords/Wooden Sword.tres" id="11_1tpwj"]
+[ext_resource type="PackedScene" uid="uid://b2q8ly7ux44qh" path="res://scenes/reusable/Core/Dropped item.tscn" id="12_y8fu1"]
+[ext_resource type="Script" path="res://scripts/Inventory/slot_info.gd" id="13_r55r7"]
+
+[node name="Level" type="Node2D"]
+y_sort_enabled = true
+script = ExtResource("1_t0kcl")
+
+[node name="ToolTip" type="RichTextLabel" parent="."]
+z_index = 2
+offset_left = -11.98
+offset_right = 54.32
+offset_bottom = 12.47
+theme_override_colors/font_outline_color = Color(0.312466, 0.312466, 0.312466, 1)
+theme_override_constants/outline_size = 2
+theme_override_constants/shadow_outline_size = 1
+theme_override_fonts/normal_font = ExtResource("2_x3dtj")
+theme_override_font_sizes/normal_font_size = 7
+scroll_active = false
+script = ExtResource("2_mg6q3")
+
+[node name="TileMap" parent="." instance=ExtResource("3_oncnj")]
+y_sort_enabled = true
+
+[node name="Player" parent="." node_paths=PackedStringArray("inventory_script", "inventory_screen") groups=["Player"] instance=ExtResource("4_1mnra")]
+inventory_script = NodePath("../InventoryUI/Inventory")
+speed = 100
+inventory_screen = NodePath("../InventoryUI")
+
+[node name="Node2D" type="Node2D" parent="Player"]
+
+[node name="Camera" parent="Player/Node2D" instance=ExtResource("5_85ptq")]
+position = Vector2(0, -21)
+
+[node name="Bunny Border" type="Node2D" parent="." node_paths=PackedStringArray("rect_top_right", "rect_bottom_left", "parent_node", "timer")]
+script = ExtResource("6_5gql2")
+is_spawner = true
+border_option = "rect"
+rect_top_right = NodePath("top_right")
+rect_bottom_left = NodePath("bottom_left")
+entity_to_spawn = ExtResource("7_sgnt3")
+parent_node = NodePath("..")
+max_entities = 20
+timer = NodePath("Timer")
+min_spawn_rate = 30.0
+max_spawn_rate = 60.0
+
+[node name="top_right" type="Node2D" parent="Bunny Border"]
+position = Vector2(527, -209)
+
+[node name="bottom_left" type="Node2D" parent="Bunny Border"]
+position = Vector2(-113, 37)
+
+[node name="Timer" type="Timer" parent="Bunny Border"]
+
+[node name="Main UI" type="CanvasLayer" parent="."]
+
+[node name="Hotbar" type="GridContainer" parent="Main UI" node_paths=PackedStringArray("hotbar_slots")]
+offset_left = 1047.0
+offset_top = 161.0
+offset_right = 1087.0
+offset_bottom = 291.0
+scale = Vector2(3, 3)
+theme_override_constants/h_separation = 0
+theme_override_constants/v_separation = 26
+script = ExtResource("9_ko3y7")
+hotbar_slots = [NodePath("HotbarSlot1"), NodePath("HotbarSlot2"), NodePath("HotbarSlot3"), NodePath("HotbarSlot4"), NodePath("HotbarSlot5"), NodePath("HotbarSlot6")]
+
+[node name="HotbarSlot1" parent="Main UI/Hotbar" instance=ExtResource("10_bu6l3")]
+layout_mode = 2
+slot_id = 20
+slot_item = ExtResource("11_1tpwj")
+
+[node name="HotbarSlot2" parent="Main UI/Hotbar" instance=ExtResource("10_bu6l3")]
+layout_mode = 2
+slot_id = 21
+
+[node name="HotbarSlot3" parent="Main UI/Hotbar" instance=ExtResource("10_bu6l3")]
+layout_mode = 2
+slot_id = 23
+
+[node name="HotbarSlot4" parent="Main UI/Hotbar" instance=ExtResource("10_bu6l3")]
+layout_mode = 2
+slot_id = 24
+
+[node name="HotbarSlot5" parent="Main UI/Hotbar" instance=ExtResource("10_bu6l3")]
+layout_mode = 2
+slot_id = 25
+
+[node name="HotbarSlot6" parent="Main UI/Hotbar" instance=ExtResource("10_bu6l3")]
+layout_mode = 2
+slot_id = 26
+
+[node name="InventoryUI" type="CanvasLayer" parent="."]
+
+[node name="Item info" type="Node2D" parent="InventoryUI"]
+position = Vector2(56, 2)
+
+[node name="Name" type="RichTextLabel" parent="InventoryUI/Item info"]
+z_index = 3
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 196.0
+offset_top = 71.0
+offset_right = 411.98
+offset_bottom = 149.65
+grow_horizontal = 2
+theme_override_constants/outline_size = 5
+theme_override_fonts/normal_font = ExtResource("2_x3dtj")
+theme_override_font_sizes/normal_font_size = 15
+fit_content = true
+tab_size = 8
+
+[node name="Description" type="RichTextLabel" parent="InventoryUI/Item info"]
+z_index = 3
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 196.0
+offset_top = 150.0
+offset_right = 411.98
+offset_bottom = 228.65
+grow_horizontal = 2
+theme_override_constants/outline_size = 5
+theme_override_fonts/normal_font = ExtResource("2_x3dtj")
+theme_override_font_sizes/normal_font_size = 11
+fit_content = true
+tab_size = 8
+
+[node name="Item preview window" type="Sprite2D" parent="InventoryUI"]
+z_index = 3
+position = Vector2(150, 168)
+scale = Vector2(3, 3)
+texture = ExtResource("9_tol3a")
+
+[node name="Item preview" type="Sprite2D" parent="InventoryUI/Item preview window"]
+scale = Vector2(2, 2)
+
+[node name="Inventory" type="Sprite2D" parent="InventoryUI" node_paths=PackedStringArray("main_node", "player", "hotbar", "slots", "name_text", "description_text", "item_preview", "temp_slot")]
+z_index = 2
+position = Vector2(255, 331)
+scale = Vector2(3, 3)
+texture = ExtResource("8_yhas0")
+script = ExtResource("9_1my2f")
+main_node = NodePath("../..")
+player = NodePath("../../Player")
+hotbar = NodePath("../../Main UI/Hotbar")
+slots = [NodePath("GridContainer/InventorySlot"), NodePath("GridContainer/InventorySlot2"), NodePath("GridContainer/InventorySlot3"), NodePath("GridContainer/InventorySlot4"), NodePath("GridContainer/InventorySlot5"), NodePath("GridContainer/InventorySlot6"), NodePath("GridContainer/InventorySlot7"), NodePath("GridContainer/InventorySlot8"), NodePath("GridContainer/InventorySlot9"), NodePath("GridContainer/InventorySlot10"), NodePath("GridContainer/InventorySlot11"), NodePath("GridContainer/InventorySlot12"), NodePath("GridContainer/InventorySlot13"), NodePath("GridContainer/InventorySlot14"), NodePath("GridContainer/InventorySlot15"), NodePath("GridContainer/InventorySlot16"), NodePath("GridContainer/InventorySlot17"), NodePath("GridContainer/InventorySlot18"), NodePath("GridContainer/InventorySlot19"), NodePath("GridContainer/InventorySlot20")]
+name_text = NodePath("../Item info/Name")
+description_text = NodePath("../Item info/Description")
+item_preview = NodePath("../Item preview window/Item preview")
+temp_slot = NodePath("../TempHeldInventorySlot")
+drop_preset = ExtResource("12_y8fu1")
+
+[node name="GridContainer" type="GridContainer" parent="InventoryUI/Inventory"]
+offset_left = -70.3333
+offset_top = -18.6667
+offset_right = 75.6667
+offset_bottom = 105.833
+size_flags_stretch_ratio = 0.0
+theme_override_constants/h_separation = 29
+theme_override_constants/v_separation = 27
+columns = 5
+
+[node name="InventorySlot" parent="InventoryUI/Inventory/GridContainer" instance=ExtResource("10_bu6l3")]
+layout_mode = 2
+
+[node name="InventorySlot2" parent="InventoryUI/Inventory/GridContainer" instance=ExtResource("10_bu6l3")]
+layout_mode = 2
+slot_id = 1
+
+[node name="InventorySlot3" parent="InventoryUI/Inventory/GridContainer" instance=ExtResource("10_bu6l3")]
+layout_mode = 2
+slot_id = 2
+
+[node name="InventorySlot4" parent="InventoryUI/Inventory/GridContainer" instance=ExtResource("10_bu6l3")]
+layout_mode = 2
+slot_id = 3
+
+[node name="InventorySlot5" parent="InventoryUI/Inventory/GridContainer" instance=ExtResource("10_bu6l3")]
+layout_mode = 2
+slot_id = 4
+
+[node name="InventorySlot6" parent="InventoryUI/Inventory/GridContainer" instance=ExtResource("10_bu6l3")]
+layout_mode = 2
+slot_id = 5
+
+[node name="InventorySlot7" parent="InventoryUI/Inventory/GridContainer" instance=ExtResource("10_bu6l3")]
+layout_mode = 2
+slot_id = 6
+
+[node name="InventorySlot8" parent="InventoryUI/Inventory/GridContainer" instance=ExtResource("10_bu6l3")]
+layout_mode = 2
+slot_id = 7
+
+[node name="InventorySlot9" parent="InventoryUI/Inventory/GridContainer" instance=ExtResource("10_bu6l3")]
+layout_mode = 2
+slot_id = 8
+
+[node name="InventorySlot10" parent="InventoryUI/Inventory/GridContainer" instance=ExtResource("10_bu6l3")]
+layout_mode = 2
+slot_id = 9
+
+[node name="InventorySlot11" parent="InventoryUI/Inventory/GridContainer" instance=ExtResource("10_bu6l3")]
+layout_mode = 2
+
+[node name="InventorySlot12" parent="InventoryUI/Inventory/GridContainer" instance=ExtResource("10_bu6l3")]
+layout_mode = 2
+
+[node name="InventorySlot13" parent="InventoryUI/Inventory/GridContainer" instance=ExtResource("10_bu6l3")]
+layout_mode = 2
+
+[node name="InventorySlot14" parent="InventoryUI/Inventory/GridContainer" instance=ExtResource("10_bu6l3")]
+layout_mode = 2
+
+[node name="InventorySlot15" parent="InventoryUI/Inventory/GridContainer" instance=ExtResource("10_bu6l3")]
+layout_mode = 2
+
+[node name="InventorySlot16" parent="InventoryUI/Inventory/GridContainer" instance=ExtResource("10_bu6l3")]
+layout_mode = 2
+
+[node name="InventorySlot17" parent="InventoryUI/Inventory/GridContainer" instance=ExtResource("10_bu6l3")]
+layout_mode = 2
+
+[node name="InventorySlot18" parent="InventoryUI/Inventory/GridContainer" instance=ExtResource("10_bu6l3")]
+layout_mode = 2
+
+[node name="InventorySlot19" parent="InventoryUI/Inventory/GridContainer" instance=ExtResource("10_bu6l3")]
+layout_mode = 2
+
+[node name="InventorySlot20" parent="InventoryUI/Inventory/GridContainer" instance=ExtResource("10_bu6l3")]
+layout_mode = 2
+
+[node name="TempHeldInventorySlot" type="Control" parent="InventoryUI" node_paths=PackedStringArray("item_sprite_node", "amount_text")]
+z_index = 4
+layout_mode = 3
+anchors_preset = 0
+offset_left = 290.0
+offset_top = 152.0
+offset_right = 290.0
+offset_bottom = 152.0
+focus_mode = 2
+script = ExtResource("13_r55r7")
+is_temp_slot = true
+item_sprite_node = NodePath("ItemSprite")
+amount_text = NodePath("ItemSprite/Amount")
+
+[node name="ItemSprite" type="Sprite2D" parent="InventoryUI/TempHeldInventorySlot"]
+z_index = 2
+position = Vector2(-131, -17)
+scale = Vector2(3, 3)
+offset = Vector2(15, 12)
+
+[node name="Amount" type="RichTextLabel" parent="InventoryUI/TempHeldInventorySlot/ItemSprite"]
+clip_contents = false
+offset_left = 5.0
+offset_top = 9.0
+offset_right = 28.28
+offset_bottom = 24.33
+mouse_filter = 2
+theme_override_font_sizes/normal_font_size = 12
+fit_content = true
+scroll_active = false
+
+[connection signal="click_on" from="TileMap" to="Player" method="_on_tile_map_click_on"]
+[connection signal="click_on" from="TileMap" to="InventoryUI/Inventory" method="_on_tile_map_click_on"]
+[connection signal="hover_over" from="TileMap" to="ToolTip" method="_on_tile_map_hover_over"]
+[connection signal="unhover_over" from="TileMap" to="ToolTip" method="_on_tile_map_unhover_over"]
+[connection signal="inv_toggled" from="Player" to="ToolTip" method="_on_player_inv_toggled"]
+[connection signal="inv_toggled" from="Player" to="TileMap" method="_on_player_inv_toggled"]
+[connection signal="inv_toggled" from="Player" to="InventoryUI/Inventory" method="_on_player_inv_toggled"]
+[connection signal="clear_equiped_item" from="Main UI/Hotbar" to="Player" method="_on_hotbar_clear_equiped_item"]
+[connection signal="equiped_item" from="Main UI/Hotbar" to="Player" method="_on_hotbar_equiped_item"]

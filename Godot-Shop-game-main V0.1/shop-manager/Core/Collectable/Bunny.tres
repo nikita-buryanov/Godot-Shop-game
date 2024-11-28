@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="collectable_re" load_steps=4 format=3 uid="uid://bol68nbbb2wjm"]
+
+[ext_resource type="Script" path="res://scripts/Inventory/Item.gd" id="1_kg3m2"]
+[ext_resource type="Script" path="res://scripts/Inventory/Collectable.gd" id="2_dwfh8"]
+[ext_resource type="Resource" uid="uid://ciadma8tjoogi" path="res://Core/Items/Bunny Leg.tres" id="2_vh8qw"]
+
+[resource]
+script = ExtResource("2_dwfh8")
+name = "Bunny"
+drops = Array[ExtResource("1_kg3m2")]([ExtResource("2_vh8qw")])
+chance = Array[float]([100.0])
+min_amount = Array[int]([1])
+max_amount = Array[int]([2])

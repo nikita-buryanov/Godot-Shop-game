@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="collectable_re" load_steps=4 format=3 uid="uid://lindfbcvhoj7"]
+
+[ext_resource type="Script" path="res://scripts/Inventory/Item.gd" id="1_1tdyd"]
+[ext_resource type="Resource" uid="uid://6ymvlxk8bqqv" path="res://Core/Items/Red Mushroom Cap.tres" id="2_3mo57"]
+[ext_resource type="Script" path="res://scripts/Inventory/Collectable.gd" id="3_t7ga1"]
+
+[resource]
+script = ExtResource("3_t7ga1")
+name = "Red Mushroom"
+drops = Array[ExtResource("1_1tdyd")]([ExtResource("2_3mo57")])
+chance = Array[float]([100.0])
+min_amount = Array[int]([1])
+max_amount = Array[int]([1])
